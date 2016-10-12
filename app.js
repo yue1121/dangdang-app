@@ -11,17 +11,10 @@ app.engine('.html', template.__express);
 app.set('view engine', 'html');
 app.set('views', './views');
 
-// 书籍分类数据
-const bookTypes = [{
-    id: "ertong",
-    name: "儿童"
-}, {
-    id: "xiaoshuo",
-    name: "小说"
-}, {
-    id: "lishi",
-    name: "历史"
-}];
+// 引入common模块
+const common = require('./common');
+const bookTypes = common.bookTypes;
+
 
 app.get('/types', (req, res) => {
     res.render('types', {
