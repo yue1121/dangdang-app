@@ -9,37 +9,47 @@ var c = new Crawler({
     incomingEncoding: 'gb2312'
 })
 
-var arrBookErTong = []
-getData('http://bang.dangdang.com/books/newhotsales/01.41.00.00.00.00-24hours-0-0-1-', 1)
+// 引入common模块
+const common = require('./common');
+const bookTypes = common.bookTypes;
 
-function getData(url, page) {
-    c.queue([{
-        uri: url + page,
-        callback: (err, result, $) => {
-            console.log(result.uri)
-                //console.log($('title').text())
-            $('.bang_list li').each((index, li) => {
-                var obj = decodeBookData($(li));
-                // obj.title = $(li).find('.name').text()
-                // obj.img = $(li).find('.pic img').attr('src')
-                // obj.author = $(li).find('.publisher_info').eq(0).text()
-                // obj.publister = $(li).find('.publisher_info').eq(1).find('a').text()
-                // obj.publist_time = $(li).find('.publisher_info').eq(1).find('span').text()
-                // obj.link = $(li).find('.pic a').attr('href')
-                // obj.price = $(li).find('.price .price_n').text()
-                    // console.log(obj)
-                    // console.log('-------')
-                arrBookErTong.push(obj)
-            })
-            if (page > 5) {
-                fs.writeFileSync('./data/book_ertong.json', JSON.stringify(arrBookErTong))
-                console.log('获取数据成功')
-            } else {
-                getData(url, page + 1)
-            }
-        }
-    }])
+bookTypes.forEach(function(item){
+  loadData(item.base_url,item.id,item.page_count);
+})
+
+/**
+ * 获取数据 使用了递归和闭包
+ * @param  {[type]} baseUrl   [用于拼接分页的基础地址]
+ * @param  {[type]} type      [分类的id]
+ * @param  {[type]} pageCount [取数据的总页数]
+ * @return {[type]}           [返回结果]
+ */
+function loadData(baseUrl,type,pageCount){
+  var arrBook = []
+  // getData('http://bang.dangdang.com/books/newhotsales/01.41.00.00.00.00-24hours-0-0-1-', 1)
+  getData(baseUrl,1);
+  function getData(url, page) {
+      c.queue([{
+          uri: url + page,
+          callback: (err, result, $) => {
+              console.log(result.uri)
+                  //console.log($('title').text())
+              $('.bang_list li').each((index, li) => {
+                  var obj = decodeBookData($(li));
+                  arrBook.push(obj)
+              })
+              if (page > pageCount) {
+                  fs.writeFileSync('./data/book_ertong.json', JSON.stringify(arrBookErTong))
+                  console.log('获取数据成功')
+              } else {
+                  getData(url, page + 1)
+              }
+          }
+      }])
+  }
 }
+
+
 
 function decodeBookData($item) {
     var obj = {}
