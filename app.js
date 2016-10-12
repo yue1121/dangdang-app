@@ -15,6 +15,9 @@ app.set('views', './views');
 const common = require('./common');
 const bookTypes = common.bookTypes;
 
+app.get('/',(req,res)=>{
+  res.redirect('/types');
+})
 
 app.get('/types', (req, res) => {
     res.render('types', {
