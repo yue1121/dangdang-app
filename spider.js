@@ -13,6 +13,7 @@ var c = new Crawler({
 const common = require('./common');
 const bookTypes = common.bookTypes;
 
+// 根据common模块中的配置文件 去当当网抓取数据
 bookTypes.forEach(function(item){
   loadData(item.base_url,item.id,item.page_count);
 })
