@@ -40,7 +40,7 @@ function loadData(baseUrl,type,pageCount){
                   arrBook.push(obj)
               })
               if (page > pageCount) {
-                  fs.writeFileSync('./data/book_ertong.json', JSON.stringify(arrBookErTong))
+                  fs.writeFileSync(`./data/book_${type}.json`, JSON.stringify(arrBook))
                   console.log('获取数据成功')
               } else {
                   getData(url, page + 1)
@@ -54,12 +54,12 @@ function loadData(baseUrl,type,pageCount){
 
 function decodeBookData($item) {
     var obj = {}
-    obj.title = $(li).find('.name').text()
-    obj.img = $(li).find('.pic img').attr('src')
-    obj.author = $(li).find('.publisher_info').eq(0).text()
-    obj.publister = $(li).find('.publisher_info').eq(1).find('a').text()
-    obj.publist_time = $(li).find('.publisher_info').eq(1).find('span').text()
-    obj.link = $(li).find('.pic a').attr('href')
-    obj.price = $(li).find('.price .price_n').text()
+    obj.title = $item.find('.name').text()
+    obj.img = $item.find('.pic img').attr('src')
+    obj.author = $item.find('.publisher_info').eq(0).text()
+    obj.publister = $item.find('.publisher_info').eq(1).find('a').text()
+    obj.publist_time = $item.find('.publisher_info').eq(1).find('span').text()
+    obj.link = $item.find('.pic a').attr('href')
+    obj.price = $item.find('.price .price_n').text()
     return obj
 }

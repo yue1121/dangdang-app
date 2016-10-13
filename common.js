@@ -14,14 +14,14 @@ const bookTypes = [{
     base_url:'http://bang.dangdang.com/books/newhotsales/01.41.00.00.00.00-24hours-0-0-1-',
     page_count:5
 }, {
-    id: "xiaoshuo",
-    name: "小说",
-    base_url:'http://bang.dangdang.com/books/newhotsales/01.41.00.00.00.00-24hours-0-0-1-',
+    id: "qingchunwenxue",
+    name: "青春文学",
+    base_url:'http://bang.dangdang.com/books/newhotsales/01.01.00.00.00.00-24hours-0-0-1-',
     page_count:5
 }, {
     id: "lishi",
     name: "历史",
-    base_url:'http://bang.dangdang.com/books/newhotsales/01.41.00.00.00.00-24hours-0-0-1-',
+    base_url:'http://bang.dangdang.com/books/newhotsales/01.36.00.00.00.00-24hours-0-0-1-',
     page_count:5
 }];
 
