@@ -39,7 +39,7 @@ function loadData(baseUrl,type,pageCount){
                   var obj = decodeBookData($(li));
                   arrBook.push(obj)
               })
-              if (page > pageCount) {
+              if (page >= pageCount) {
                   fs.writeFileSync(`./data/book_${type}.json`, JSON.stringify(arrBook))
                   console.log('获取数据成功')
               } else {

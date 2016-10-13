@@ -16,3 +16,8 @@ npm install # 安装依赖项
 gulp        # 通过gulpfile直接启动项目
 # http://localhost:3000 直接在浏览器中访问
 ```
+
+#### 配置信息说明
+```
+在common.js文件中有一个bookTypes参数,对其进行配置可以继续抓取相应的数据
+```
