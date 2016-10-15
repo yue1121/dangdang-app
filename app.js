@@ -27,6 +27,8 @@ app.get('/types', (req, res) => {
 
 app.get('/list/:id', (req, res) => {
     var data = [];
+
+    //通过try catch做异常捕获处理
     try{
       data = JSON.parse(fs.readFileSync(`./data/book_${req.params.id}.json`).toString());
     }
@@ -46,6 +48,6 @@ app.get('/list/:id', (req, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(2000, () => {
     console.log('服务器运行于3000端口');
 })
